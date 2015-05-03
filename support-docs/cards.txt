@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+
+import random
+class Card(object):
+    def __init__(self, number):
+        random.seed()
+        self.ranks = ['2','3','4','5','6','7','8','9','T','J','Q','K','A']
+        self.suits = ['c','d','h','s']
+        self.values = [2,3,5,7,11,13,17,19,23,29,31,37,41]
+        self.number = number
+    def __str__(self):
+        return self.ranks[self.number % 13] + self.suits[int(self.number / 13)]
+    def __repr__(self):
+        return self.ranks[self.number % 13] + self.suits[int(self.number / 13)]
+    def __eq__(self, other):
+        return self.number == other.number
+    def rank(self):
+        return self.ranks[self.number % 13]
+    def suit(self):
+        return self.suits[int(self.number / 13)]
+    def value(self):
+        return self.values[self.number % 13]
+
+class Shoe:
+    def __init__(self, howMany=1):
+        self.howMany = howMany
+        self.cards = []
+        for k in range(howMany):
+            for j in range(52):
+                self.cards.append(Card(j))
+        random.shuffle(self.cards)
+
+class Player:
+    def __init__(self, number, name=''):
+        self.number = 0;
+        self.name = name
+        self.bankroll = 0;
+        self.holeCards = Shoe.cards()  # questionable syntax
+    def player(self):
+        return self.number(number)     # also questionable syntax
+
+class Table:
+    def __init__(self, numPlayers):
+        self.numPlayers = numPlayers
+        
+
+
+deck = Shoe()
+for k in range(52):
+    c = deck.cards[k]
+    if k % 13 == 0:
+        print ()
+        print (c, '\t', end='')
+    else:
+        print (c, '\t', end='')
+      
+
+print ()
+print ()
+
+
+"""  Sample card dealing routine that may be able
+       to be tweaked for HoldEm
+
+    def deal(self, n = 1):
+        cardsToBeGiven = []
+        for k in range(n):
+            cardsToBeGiven.append(self.cards.pop())
+        return cardsToBeGiven
+"""
+
